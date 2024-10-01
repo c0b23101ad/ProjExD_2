@@ -67,7 +67,7 @@ def main():
             kk2_rct.center = 730, 300  # こうかとん右
             screen.blit(kk2_img, kk2_rct)
             pg.display.update()
-            time.sleep(5)
+            time.sleep(5)  # 処理を5秒間停止
             return
 
         key_lst = pg.key.get_pressed()
