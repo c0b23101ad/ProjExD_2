@@ -2,6 +2,7 @@ import os
 import random
 import sys
 import pygame as pg
+import time
 
 
 WIDTH, HEIGHT = 1100, 650
@@ -43,7 +44,11 @@ def main():
     bb_rct.centerx = random.randint(0, WIDTH)
     bb_rct.centery = random.randint(0, HEIGHT)
     vx, vy = +5, +5
-
+    font = pg.font.Font(None, 80)
+    overlay = pg.Surface((WIDTH, HEIGHT))
+    overlay.set_alpha(128)
+    overlay.fill((0, 0, 0))
+    kk2_img = pg.transform.rotozoom(pg.image.load("fig/8.png"), 0, 0.9)
     clock = pg.time.Clock()
     tmr = 0
     while True:
@@ -52,6 +57,17 @@ def main():
                 return
         screen.blit(bg_img, [0, 0]) 
         if kk_rct.colliderect(bb_rct):
+            screen.blit(overlay, (0, 0))
+            game_over_text = font.render("GAME OVER", True, (255, 255, 255))
+            screen.blit(game_over_text, (WIDTH // 2 - 180, HEIGHT //2 - 40))
+            kk2_rct = kk2_img.get_rect()
+            kk2_rct.center = 350, 300
+            screen.blit(kk2_img, kk2_rct)
+            kk2_rct = kk2_img.get_rect()
+            kk2_rct.center = 730, 300
+            screen.blit(kk2_img, kk2_rct)
+            pg.display.update()
+            time.sleep(5)
             return
 
         key_lst = pg.key.get_pressed()
